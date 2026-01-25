@@ -1,0 +1,49 @@
+age == 18
+score != 95.5
+height > 175.0f
+weight < 60
+level >= 5
+rank <= 3
+name == 'zhangsan'
+status == "active"
+is_vip == TRUE
+is_deleted == false
+18 == age
+95.5 != score
+175.0f > height
+60 < weight
+5 >= level
+3 <= rank
+'zhangsan' == name
+"active" == status
+TRUE == is_vip
+false == is_deleted
+NOT age == 18
+!score != 95.5
+NOT !is_vip == true
+!NOT rank <= 3
+age == 18 AND score > 90
+is_vip == TRUE AND status == "active"
+age < 18 OR age > 60
+score < 60 OR rank >= 10
+(age == 18 AND score > 90) OR (is_vip == TRUE AND status == "active")
+NOT ((age < 18 AND score < 60) OR (rank > 10 AND is_deleted == true))
+EXIST (name)
+exist (age)
+role [1,2,3]
+grade IN (1,2,3,4)
+tag ['a','b','c']
+status IN ("active","inactive")
+type [TRUE,FALSE]
+score [90.5,85.0f,78]
+user[age == 18 AND is_vip == TRUE]
+order[status == "paid" OR amount > 1000]
+goods[!type [1,2] AND EXIST (sku)]
+#user.base_info.age == user_age
+#{label._123} AND !#{label._886}
+#user.age >= act_age_info.age
+order.amount > #config.amount_1000
+is_vip == TRUE AND status == "active" AND #{label._fact_tag}
+user.base_info.age == 18
+order.detail.amount > 1000
+goods.sku.info.is_valid == TRUE

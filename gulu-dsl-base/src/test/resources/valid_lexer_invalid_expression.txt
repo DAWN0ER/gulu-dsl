@@ -1,0 +1,29 @@
+AND age == 18
+age == 18 OR
+NOT
+!
+age == 18 AND OR score > 90
+age == 18 OR AND score > 90
+(age == 18 AND score > 90
+age == 18 AND score > 90)
+((age == 18) OR score > 90))
+EXIST name
+EXIST (name, age)
+role [1,2,]
+role []
+grade IN (1,2,)
+grade IN ()
+user[age == 18 AND]
+user[age == 18 OR]
+NOT (age == 18
+!age == 18 AND
+18 [1,2,3]
+18 IN (1,2,3)
+#{user.age} [1,2]
+#user.age IN (1,2)
+NOT AND age == 18
+OR !score < 60
+user[EXIST (age) AND]
+(age == 18 OR) AND score > 90
+user == user2
+#{ref_a} > 885

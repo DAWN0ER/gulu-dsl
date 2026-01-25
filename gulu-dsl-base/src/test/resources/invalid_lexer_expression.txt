@@ -1,0 +1,12 @@
+age == 18.
+score != 95.5.0f
+user.age_ == 18.
+name == 'zhang'san'
+user.1age == 18
+user.age == #18
+#{user age} == 18
+age & score > 90
+age | score < 60
+user..age == 18
+.age == 18
+user.age. == 18
