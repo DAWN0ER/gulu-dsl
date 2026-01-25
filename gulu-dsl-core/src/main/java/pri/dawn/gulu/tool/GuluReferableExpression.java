@@ -1,5 +1,7 @@
 package pri.dawn.gulu.tool;
 
+import pri.dawn.gulu.ast.GuluAstNode;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -9,6 +11,8 @@ package pri.dawn.gulu.tool;
  */
 public interface GuluReferableExpression extends GuluExpression {
 
-    String referPath();
+    String getReferPath();
+
+    GuluAstNode getAstRootNode();
 
 }

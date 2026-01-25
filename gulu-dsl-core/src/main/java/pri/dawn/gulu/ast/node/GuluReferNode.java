@@ -1,7 +1,6 @@
 package pri.dawn.gulu.ast.node;
 
 import lombok.Getter;
-import pri.dawn.gulu.ast.GuluAstNode;
 import pri.dawn.gulu.ast.GuluEvalBoolNode;
 import pri.dawn.gulu.ast.GuluNodeVisitor;
 import pri.dawn.gulu.exception.ExpressionEvaluateException;
@@ -26,11 +25,11 @@ public class GuluReferNode implements GuluEvalBoolNode {
 
     @Override
     public boolean evaluate(GuluContext context) {
-        GuluAstNode ref = context.getReferExpression(referPath);
-        if (ref instanceof GuluEvalBoolNode) {
-            return ((GuluEvalBoolNode) ref).evaluate(context);
+        Boolean result = context.getReferExpressionResult(referPath);
+        if (result == null) {
+            throw new ExpressionEvaluateException("Refer expression can not evaluate to boolean");
         }
-        throw new ExpressionEvaluateException("Refer node can not evaluate to boolean");
+        return result;
     }
 
     @Override

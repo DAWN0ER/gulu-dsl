@@ -1,6 +1,7 @@
 package pri.dawn.gulu.ast;
 
 import pri.dawn.gulu.tool.GuluContext;
+import pri.dawn.gulu.tool.GuluReferableExpression;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,12 +23,18 @@ public class NestedSubContext implements GuluContext {
     }
 
     @Override
-    public GuluAstNode getReferExpression(String path) {
+    public GuluAstNode getReferAstNode(String path) {
         return null;
     }
+
 
     @Override
     public Boolean getReferExpressionResult(String path) {
         return null;
+    }
+
+    @Override
+    public void registerReferExpression(GuluReferableExpression expression) {
+
     }
 }

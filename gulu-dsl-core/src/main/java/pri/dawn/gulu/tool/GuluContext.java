@@ -15,8 +15,11 @@ public interface GuluContext {
 
     Object getEnvVar(String path);
 
-    GuluAstNode getReferExpression(String path);
+    GuluAstNode getReferAstNode(String path);
 
     Boolean getReferExpressionResult(String path);
+
+    void registerReferExpression(GuluReferableExpression expression);
+
 
 }

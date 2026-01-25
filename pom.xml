@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>gulu-dsl-base</module>
+        <module>gulu-dsl-core</module>
+        <module>gulu-dsl-extension</module>
     </modules>
 
     <properties>
