@@ -1,5 +1,7 @@
 package pri.dawn.gulu.tool;
 
+import pri.dawn.gulu.ast.GuluAstNode;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -12,5 +14,7 @@ public interface GuluExpression {
     String getExpressionText();
 
     boolean evaluate(GuluContext context);
+
+    GuluAstNode getAstRootNode();
 
 }

@@ -37,8 +37,8 @@ public class GuluBoolLogicNode implements GuluEvalBoolNode {
     }
 
     @Override
-    public List<GuluAstNode> getChildren() {
-        return null;
+    public List<? extends GuluAstNode> getChildren() {
+        return conditions;
     }
 
     @Override

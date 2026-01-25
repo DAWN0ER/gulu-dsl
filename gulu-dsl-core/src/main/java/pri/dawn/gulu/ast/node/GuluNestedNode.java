@@ -28,7 +28,7 @@ public class GuluNestedNode implements GuluEvalBoolNode {
     }
 
     @Override
-    public List<GuluAstNode> getChildren() {
+    public List<? extends GuluAstNode> getChildren() {
         List<GuluAstNode> children = new ArrayList<>();
         children.add(pathIdentifier);
         children.add(nestedExpression);

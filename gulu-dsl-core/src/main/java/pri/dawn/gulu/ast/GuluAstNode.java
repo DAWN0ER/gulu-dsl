@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface GuluAstNode {
 
-    default List<GuluAstNode> getChildren(){
+    default List<? extends GuluAstNode> getChildren(){
         return null;
     }
 

@@ -37,4 +37,9 @@ public class GuluCommonExpression implements GuluExpression {
         }
         throw new ExpressionEvaluateException("Expression can not evaluate to boolean");
     }
+
+    @Override
+    public GuluAstNode getAstRootNode() {
+        return root;
+    }
 }
