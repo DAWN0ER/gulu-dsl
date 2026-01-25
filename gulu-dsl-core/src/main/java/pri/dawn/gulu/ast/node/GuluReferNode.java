@@ -20,7 +20,7 @@ public class GuluReferNode implements GuluEvalBoolNode {
 
     public GuluReferNode(String tokenValue) {
         // #{path.path} -> path.path
-        this.referPath = tokenValue.substring(1, tokenValue.length() - 1);
+        this.referPath = tokenValue.substring(2, tokenValue.length() - 1);
     }
 
     @Override
