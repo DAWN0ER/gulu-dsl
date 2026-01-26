@@ -83,6 +83,9 @@ public class GuluBinaryCompareNode implements GuluEvalBoolNode {
         if (node instanceof GuluStringNode) {
             return ((GuluStringNode) node).getValue();
         }
+        if (node instanceof GuluBooleanNode){
+            return ((GuluBooleanNode) node).getValue();
+        }
         if (node instanceof GuluNumberNode) {
             return ((GuluNumberNode) node).getValue();
         }
