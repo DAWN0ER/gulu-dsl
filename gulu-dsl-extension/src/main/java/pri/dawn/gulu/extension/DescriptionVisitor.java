@@ -83,7 +83,7 @@ public class DescriptionVisitor implements GuluNodeVisitor<String> {
 
     @Override
     public String visitEnvVarNode(GuluEnvVarNode node) {
-        return getFormattedDescription(GuluEnvVarNode.class, node.getEnvIdentifier());
+        return getFormattedDescription(GuluEnvVarNode.class, node.getEnvVarPath());
     }
 
     @Override

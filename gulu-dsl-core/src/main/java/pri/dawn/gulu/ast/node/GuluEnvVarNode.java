@@ -14,10 +14,10 @@ import pri.dawn.gulu.ast.GuluNodeVisitor;
 @Getter
 public class GuluEnvVarNode implements GuluAstNode {
 
-    private final String envIdentifier;
+    private final String envVarPath;
 
     public GuluEnvVarNode(String tokenValue) {
-        this.envIdentifier = tokenValue.substring(1);
+        this.envVarPath = tokenValue.substring(1);
     }
 
 
