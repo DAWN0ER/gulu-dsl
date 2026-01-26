@@ -53,6 +53,12 @@ public class GuluParser {
         return false;
     }
 
+    private GuluToken.Type peekNext() {
+        int temp = index + 1;
+        GuluToken token = currentToken = temp > tokens.size() ? EOF_TOKEN : tokens.get(temp);
+        return token.getType();
+    }
+
     public GuluAstNode parser() {
         GuluEvalBoolNode expression = parserOrExpression();
         if (currentToken.getType() != EOF) {
@@ -125,7 +131,7 @@ public class GuluParser {
             // a[1,2] contains | nested.object[a1=1 and a2 = 2] expression
             if (check(LBRACK)) {
                 advance();
-                if (check(BOOLEAN, STRING, NUMBER, ENV_VAR)) {
+                if (check(BOOLEAN, STRING, NUMBER, ENV_VAR) && (peekNext() == COMMA || peekNext() == RBRACK)) {
                     List<GuluAstNode> literalList = parserLiteralList();
                     consume(RBRACK);
                     return new GuluContainsNode(identifier, literalList);
