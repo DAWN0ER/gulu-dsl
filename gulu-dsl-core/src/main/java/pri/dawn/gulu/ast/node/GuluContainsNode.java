@@ -6,10 +6,10 @@ import pri.dawn.gulu.ast.GuluEvalBoolNode;
 import pri.dawn.gulu.ast.GuluNodeVisitor;
 import pri.dawn.gulu.exception.ExpressionEvaluateException;
 import pri.dawn.gulu.tool.GuluContext;
+import pri.dawn.gulu.utils.GuluNodeValueUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,28 +45,29 @@ public class GuluContainsNode implements GuluEvalBoolNode {
     @Override
     public boolean evaluate(GuluContext context) {
         Object identifier = context.getIdentifier(this.identifier.getPath());
-        if(!(identifier instanceof Collection)){
+        if (identifier == null) {
+            throw new ExpressionEvaluateException(String.format("`%s` is null!", this.identifier.getPath()));
+        }
+        if (!(identifier instanceof Collection)) {
             throw new ExpressionEvaluateException("Identifier is not a collection");
         }
         Collection<?> collectionIdentifier = (Collection<?>) identifier;
+        Set<Long> millsConvertSet = collectionIdentifier.stream().map(e -> GuluNodeValueUtils.tryConvertEpochMills(e, context.getSupportedDateFormat()))
+                .filter(Objects::nonNull).collect(Collectors.toSet());
+
         for (GuluAstNode node : containsList) {
-            if(!collectionIdentifier.contains(getValue(node,context))){
+            Object nodeValue = GuluNodeValueUtils.value(node, context);
+            Long nodeMillValue = GuluNodeValueUtils.tryConvertEpochMills(nodeValue, context.getSupportedDateFormat());
+            
+            boolean valueMatched = collectionIdentifier.contains(nodeValue);
+            boolean timeMatched = nodeMillValue != null && millsConvertSet.contains(nodeMillValue);
+            
+            if (!valueMatched && !timeMatched) {
                 return false;
             }
         }
         return true;
     }
 
-    private Object getValue(GuluAstNode node, GuluContext ctx) {
-        if (node instanceof GuluStringNode) {
-            return ((GuluStringNode) node).getValue();
-        }
-        if (node instanceof GuluNumberNode) {
-            return ((GuluNumberNode) node).getValue();
-        }
-        if (node instanceof GuluEnvVarNode) {
-            return ctx.getEnvVar(((GuluEnvVarNode) node).getEnvVarPath());
-        }
-        throw new ExpressionEvaluateException("Unsupported AstNode in BinaryCompareNode");
-    }
+
 }

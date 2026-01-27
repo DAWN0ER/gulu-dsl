@@ -2,6 +2,9 @@ package pri.dawn.gulu.tool;
 
 import pri.dawn.gulu.ast.GuluAstNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -21,5 +24,7 @@ public interface GuluContext {
 
     void registerReferExpression(GuluReferableExpression expression);
 
-
+    default List<String> getSupportedDateFormat(){
+        return new ArrayList<>();
+    }
 }

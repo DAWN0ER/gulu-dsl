@@ -4,8 +4,8 @@ import lombok.Getter;
 import pri.dawn.gulu.ast.GuluAstNode;
 import pri.dawn.gulu.ast.GuluEvalBoolNode;
 import pri.dawn.gulu.ast.GuluNodeVisitor;
-import pri.dawn.gulu.exception.ExpressionEvaluateException;
 import pri.dawn.gulu.tool.GuluContext;
+import pri.dawn.gulu.utils.GuluAstNodeComparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,35 +43,13 @@ public class GuluInFuncNode implements GuluEvalBoolNode {
 
     @Override
     public boolean evaluate(GuluContext context) {
-        Object identifier = context.getIdentifier(this.identifier.getPath());
         // if identifier value equals any value in literalList, return true
+        GuluAstNodeComparator comparator = new GuluAstNodeComparator(context);
         for (GuluAstNode node : literalList) {
-            Object value = getValue(node, context);
-            if (value.equals(identifier)) {
+            if (comparator.compare(node, identifier) == 0) {
                 return true;
-            }
-            if(value instanceof Number && identifier instanceof Number){
-                if(((Number) value).doubleValue() == ((Number) identifier).doubleValue()){
-                    return true;
-                }
             }
         }
         return false;
-    }
-
-    private Object getValue(GuluAstNode node, GuluContext ctx) {
-        if(node instanceof GuluStringNode){
-            return ((GuluStringNode) node).getValue();
-        }
-        if(node instanceof GuluNumberNode){
-            return ((GuluNumberNode) node).getValue();
-        }
-        if(node instanceof GuluBooleanNode){
-            return ((GuluBooleanNode) node).getValue();
-        }
-        if(node instanceof GuluEnvVarNode){
-            return ctx.getEnvVar(((GuluEnvVarNode) node).getEnvVarPath());
-        }
-        throw new ExpressionEvaluateException("Unsupported AstNode in BinaryCompareNode");
     }
 }

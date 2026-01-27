@@ -1,7 +1,11 @@
 package pri.dawn.gulu.ast;
 
+import pri.dawn.gulu.exception.ExpressionEvaluateException;
 import pri.dawn.gulu.tool.GuluContext;
 import pri.dawn.gulu.tool.GuluReferableExpression;
+import pri.dawn.gulu.utils.ReflectUtils;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,29 +16,42 @@ import pri.dawn.gulu.tool.GuluReferableExpression;
  */
 public class NestedSubContext implements GuluContext {
 
+    private final GuluContext parentCtx;
+    private final Object currentElement;
+
+    public NestedSubContext(GuluContext parentCtx, Object currentElement) {
+        this.parentCtx = parentCtx;
+        this.currentElement = currentElement;
+    }
+
     @Override
     public Object getIdentifier(String path) {
-        return null;
+        return ReflectUtils.getFieldByPath(this.currentElement, path);
     }
 
     @Override
     public Object getEnvVar(String path) {
-        return null;
+        return parentCtx.getEnvVar(path);
     }
 
     @Override
     public GuluAstNode getReferAstNode(String path) {
-        return null;
+        throw new ExpressionEvaluateException("Nested expression can not refer to other expression!");
     }
 
 
     @Override
     public Boolean getReferExpressionResult(String path) {
-        return null;
+        throw new ExpressionEvaluateException("Nested expression can not refer to other expression!");
     }
 
     @Override
     public void registerReferExpression(GuluReferableExpression expression) {
+        throw new ExpressionEvaluateException("Nested expression can not refer to other expression!");
+    }
 
+    @Override
+    public List<String> getSupportedDateFormat() {
+        return parentCtx.getSupportedDateFormat();
     }
 }
