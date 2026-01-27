@@ -11,7 +11,7 @@ import java.util.Comparator;
  * @author Dawn Yang
  * @since 2026/01/27/0:41
  */
-public class AstNodeComparator implements Comparator<GuluAstNode> {
+public class GuluAstNodeComparator implements Comparator<GuluAstNode> {
     @Override
     public int compare(GuluAstNode o1, GuluAstNode o2) {
         // 完善工具类，比较相关的只用这个作比较

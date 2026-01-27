@@ -15,6 +15,6 @@ public interface GuluAstNode {
         return null;
     }
 
-    <T> T visit(GuluNodeVisitor<T> visitor);
+    <T> T accent(GuluNodeVisitor<T> visitor);
 
 }

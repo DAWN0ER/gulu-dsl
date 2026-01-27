@@ -32,7 +32,7 @@ public class DescriptionTest {
         if (root == null) {
             return "";
         }
-        StringBuilder res = new StringBuilder(root.visit(new DescriptionVisitor()) + "\n");
+        StringBuilder res = new StringBuilder(root.accent(new DescriptionVisitor()) + "\n");
         List<? extends GuluAstNode> children = root.getChildren();
         if (children != null) {
             for (int i = 0; i < children.size(); i++) {
@@ -48,7 +48,7 @@ public class DescriptionTest {
 
         StringBuilder res = new StringBuilder(prefix);
         res.append(isLast ? "└── " : "├── ");
-        res.append(node.visit(new DescriptionVisitor()));
+        res.append(node.accent(new DescriptionVisitor()));
         res.append('\n');
 
         List<? extends GuluAstNode> children = node.getChildren();

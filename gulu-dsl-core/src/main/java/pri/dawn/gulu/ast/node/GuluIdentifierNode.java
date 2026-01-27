@@ -20,7 +20,7 @@ public class GuluIdentifierNode implements GuluAstNode {
     private String path;
 
     @Override
-    public <T> T visit(GuluNodeVisitor<T> visitor) {
+    public <T> T accent(GuluNodeVisitor<T> visitor) {
         return visitor.visitIdentifierNode(this);
     }
 }
