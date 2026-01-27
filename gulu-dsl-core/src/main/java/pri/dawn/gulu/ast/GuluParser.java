@@ -55,7 +55,7 @@ public class GuluParser {
 
     private GuluToken.Type peekNext() {
         int temp = index + 1;
-        GuluToken token = currentToken = temp > tokens.size() ? EOF_TOKEN : tokens.get(temp);
+        GuluToken token = temp > tokens.size() ? EOF_TOKEN : tokens.get(temp);
         return token.getType();
     }
 

@@ -18,7 +18,7 @@ public class ReflectUtils {
         String[] pathArr = path.split("\\.");
         for (String pathItem : pathArr) {
             try {
-                Field field = obj.getClass().getField(pathItem);
+                Field field = obj.getClass().getDeclaredField(pathItem);
                 field.setAccessible(true);
                 obj = field.get(obj);
             } catch (Exception e) {

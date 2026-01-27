@@ -23,7 +23,7 @@ public class DescriptionTest {
         String expressionText = "NOT (user.base_info.age >= 18 AND (user.score > 95.5f OR user.account.status IN (\"active\",\"verified\"))) OR (EXIST (user.order.id) AND !user.tags ['vip','new'] AND order[order.amount > 1000.0 AND !order.is_refunded == FALSE]) AND (#{user.level} OR NOT order.pay_time < 1672502400)";
         GuluExpression expression = GuluExpressions.parser(expressionText);
         String desc = tree2String(expression.getAstRootNode());
-        log.debug("description of ast node is:\n{}",desc);
+        log.debug("description of ast node is:\n{}", desc);
     }
 
 

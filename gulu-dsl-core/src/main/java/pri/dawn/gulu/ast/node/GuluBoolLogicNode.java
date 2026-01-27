@@ -54,6 +54,7 @@ public class GuluBoolLogicNode implements GuluEvalBoolNode {
                     return false;
                 }
             }
+            return true;
         }
         if(op == GuluToken.Type.OR){
             for (GuluEvalBoolNode condition : conditions) {
@@ -61,6 +62,7 @@ public class GuluBoolLogicNode implements GuluEvalBoolNode {
                     return true;
                 }
             }
+            return false;
         }
         throw new ExpressionEvaluateException("Illegal logical operator: must be AND/OR.");
     }

@@ -30,7 +30,7 @@ public class GuluNumberNode implements GuluAstNode {
             return new GuluNumberNode(NumberType.FLOAT, Float.parseFloat(stringVal));
         }
         if (stringVal.indexOf('l') > 0 || stringVal.indexOf('L') > 0) {
-            return new GuluNumberNode(NumberType.LONG, Long.parseLong(stringVal));
+            return new GuluNumberNode(NumberType.LONG, Long.parseLong(stringVal.substring(0,stringVal.length()-1)));
         }
         if (stringVal.indexOf('.') > 0) {
             return new GuluNumberNode(NumberType.DOUBLE, Double.parseDouble(stringVal));
