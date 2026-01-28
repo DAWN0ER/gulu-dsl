@@ -1,7 +1,10 @@
 package pri.dawn.gulu.extension;
 
+import pri.dawn.gulu.ast.GuluAstNode;
 import pri.dawn.gulu.ast.GuluNodeVisitor;
 import pri.dawn.gulu.ast.node.*;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +14,39 @@ import pri.dawn.gulu.ast.node.*;
  * @since 2026/01/25/14:03
  */
 public class DescriptionVisitor implements GuluNodeVisitor<String> {
+
+    public String ast2StringDescription(GuluAstNode root) {
+        if (root == null) {
+            return "";
+        }
+        StringBuilder res = new StringBuilder(root.accent(this) + "\n");
+        List<? extends GuluAstNode> children = root.getChildren();
+        if (children != null) {
+            for (int i = 0; i < children.size(); i++) {
+                boolean last = (i == children.size() - 1);
+                res.append(tree2StringCore(children.get(i), "    ", last));
+            }
+        }
+        return res.toString();
+    }
+
+    private StringBuilder tree2StringCore(GuluAstNode node, String prefix, boolean isLast) {
+        if (node == null) return new StringBuilder();
+
+        StringBuilder res = new StringBuilder(prefix);
+        res.append(isLast ? "└── " : "├── ");
+        res.append(node.accent(this));
+        res.append('\n');
+
+        List<? extends GuluAstNode> children = node.getChildren();
+        if (children != null) {
+            for (int i = 0; i < children.size(); i++) {
+                boolean last = (i == children.size() - 1);
+                res.append(tree2StringCore(children.get(i), prefix + (isLast ? "    " : "│   "), last));
+            }
+        }
+        return res;
+    }
 
     private String getFormattedDescription(Class<?> nodeClass, Object... description) {
         StringBuilder sb = new StringBuilder();
