@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
  */
 public class GuluNodeValueUtils {
 
-    // TODO 获取节点在当前上下文的 value 值和对应的转换规则
     public static Object value(GuluAstNode node, GuluContext ctx){
         if (node instanceof GuluIdentifierNode) {
             return ctx.getIdentifier(((GuluIdentifierNode) node).getPath());
