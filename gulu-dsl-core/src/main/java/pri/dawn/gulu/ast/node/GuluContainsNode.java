@@ -45,11 +45,11 @@ public class GuluContainsNode implements GuluEvalBoolNode {
     @Override
     public boolean evaluate(GuluContext context) {
         Object identifier = context.getIdentifier(this.identifier.getPath());
-        if (identifier == null) {
-            throw new ExpressionEvaluateException(String.format("`%s` is null!", this.identifier.getPath()));
-        }
-        if (!(identifier instanceof Collection)) {
+        if (identifier != null && !(identifier instanceof Collection)) {
             throw new ExpressionEvaluateException("Identifier is not a collection");
+        }
+        if (identifier == null || ((Collection<?>) identifier).isEmpty()) {
+            return false;
         }
         Collection<?> collectionIdentifier = (Collection<?>) identifier;
         Set<Long> millsConvertSet = collectionIdentifier.stream().map(e -> GuluNodeValueUtils.tryConvertEpochMills(e, context.getSupportedDateFormat()))
@@ -58,10 +58,10 @@ public class GuluContainsNode implements GuluEvalBoolNode {
         for (GuluAstNode node : containsList) {
             Object nodeValue = GuluNodeValueUtils.value(node, context);
             Long nodeMillValue = GuluNodeValueUtils.tryConvertEpochMills(nodeValue, context.getSupportedDateFormat());
-            
+
             boolean valueMatched = collectionIdentifier.contains(nodeValue);
             boolean timeMatched = nodeMillValue != null && millsConvertSet.contains(nodeMillValue);
-            
+
             if (!valueMatched && !timeMatched) {
                 return false;
             }
