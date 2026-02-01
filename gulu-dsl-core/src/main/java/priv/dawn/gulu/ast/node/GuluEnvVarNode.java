@@ -22,7 +22,7 @@ public class GuluEnvVarNode implements GuluAstNode {
 
 
     @Override
-    public <T> T accent(GuluNodeVisitor<T> visitor) {
+    public <T> T accept(GuluNodeVisitor<T> visitor) {
         return visitor.visitEnvVarNode(this);
     }
 }

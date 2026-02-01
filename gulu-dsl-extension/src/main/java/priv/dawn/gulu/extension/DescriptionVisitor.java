@@ -19,7 +19,7 @@ public class DescriptionVisitor implements GuluNodeVisitor<String> {
         if (root == null) {
             return "";
         }
-        StringBuilder res = new StringBuilder(root.accent(this) + "\n");
+        StringBuilder res = new StringBuilder(root.accept(this) + "\n");
         List<? extends GuluAstNode> children = root.getChildren();
         if (children != null) {
             for (int i = 0; i < children.size(); i++) {
@@ -35,7 +35,7 @@ public class DescriptionVisitor implements GuluNodeVisitor<String> {
 
         StringBuilder res = new StringBuilder(prefix);
         res.append(isLast ? "└── " : "├── ");
-        res.append(node.accent(this));
+        res.append(node.accept(this));
         res.append('\n');
 
         List<? extends GuluAstNode> children = node.getChildren();

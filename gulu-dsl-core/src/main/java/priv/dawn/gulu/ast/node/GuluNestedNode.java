@@ -39,7 +39,7 @@ public class GuluNestedNode implements GuluEvalBoolNode {
     }
 
     @Override
-    public <T> T accent(GuluNodeVisitor<T> visitor) {
+    public <T> T accept(GuluNodeVisitor<T> visitor) {
         return visitor.visitNestedNode(this);
     }
 

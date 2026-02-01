@@ -1,9 +1,8 @@
 package priv.dawn.gulu.ast;
 
-import pri.dawn.gulu.ast.node.*;
+import priv.dawn.gulu.ast.node.*;
 import priv.dawn.gulu.exception.GuluAstParserException;
 import priv.dawn.gulu.token.GuluToken;
-import priv.dawn.gulu.ast.node.*;
 
 import java.util.ArrayList;
 import java.util.List;

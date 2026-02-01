@@ -19,7 +19,7 @@ public class GuluStringNode implements GuluAstNode {
     private final String value;
 
     @Override
-    public <T> T accent(GuluNodeVisitor<T> visitor) {
+    public <T> T accept(GuluNodeVisitor<T> visitor) {
         return visitor.visitStringNode(this);
     }
 }
