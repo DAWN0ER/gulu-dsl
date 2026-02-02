@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 public class EsQueryTransformerVisitor implements GuluNodeVisitor<QueryBuilder> {
 
     private final GuluContext context;
+    private String currentNestedPrefix = "";
 
     public EsQueryTransformerVisitor(GuluContext context) {
         this.context = context;
@@ -56,12 +57,12 @@ public class EsQueryTransformerVisitor implements GuluNodeVisitor<QueryBuilder> 
         if (left instanceof GuluIdentifierNode) {
             String pathName = ((GuluIdentifierNode) left).getPath();
             Object value = GuluNodeValueUtils.value(right, context);
-            return assembleTermQuery(pathName,node.getCompareOp(),value);
+            return assembleTermQuery(wrapPath(pathName), node.getCompareOp(), value);
         }
         if (right instanceof GuluIdentifierNode) {
             String pathName = ((GuluIdentifierNode) right).getPath();
             Object value = GuluNodeValueUtils.value(left, context);
-            return assembleTermQuery(pathName,reverseOp(node.getCompareOp()),value);
+            return assembleTermQuery(wrapPath(pathName), reverseOp(node.getCompareOp()), value);
         }
         throw new EsQueryTransformException("BinaryCompareNode's left or right is not IdentifierNode");
     }
@@ -69,7 +70,7 @@ public class EsQueryTransformerVisitor implements GuluNodeVisitor<QueryBuilder> 
     @Override
     public QueryBuilder visitExistedNode(GuluExistedNode node) {
         String path = node.getIdentifierNode().getPath();
-        return QueryBuilders.existsQuery(path);
+        return QueryBuilders.existsQuery(wrapPath(path));
     }
 
     @Override
@@ -78,7 +79,7 @@ public class EsQueryTransformerVisitor implements GuluNodeVisitor<QueryBuilder> 
         Collection<Object> list = node.getLiteralList().stream()
                 .map(n -> GuluNodeValueUtils.value(n, context))
                 .collect(Collectors.toList());
-        return QueryBuilders.termsQuery(path, list);
+        return QueryBuilders.termsQuery(wrapPath(path), list);
     }
 
     @Override
@@ -87,37 +88,44 @@ public class EsQueryTransformerVisitor implements GuluNodeVisitor<QueryBuilder> 
         Collection<Object> list = node.getContainsList().stream()
                 .map(n -> GuluNodeValueUtils.value(n, context))
                 .collect(Collectors.toList());
-        return QueryBuilders.termsQuery(path, list);
+        return QueryBuilders.termsQuery(wrapPath(path), list);
     }
 
     @Override
     public QueryBuilder visitNestedNode(GuluNestedNode node) {
         String path = node.getPathIdentifier().getPath();
+        // nested 嵌套逻辑
+        String prefixStorage = currentNestedPrefix;
+        currentNestedPrefix = wrapPath(path);
         QueryBuilder nestedQuery = node.getNestedExpression().accept(this);
-        return QueryBuilders.nestedQuery(path, nestedQuery, ScoreMode.None);
+        currentNestedPrefix = prefixStorage;
+        return QueryBuilders.nestedQuery(wrapPath(path), nestedQuery, ScoreMode.None);
     }
 
     @Override
     public QueryBuilder visitReferNode(GuluReferNode node) {
+        if (!currentNestedPrefix.isEmpty()) {
+            throw new EsQueryTransformException("Nested query can not refer other Expression");
+        }
         return context.getReferAstNode(node.getReferPath()).accept(this);
     }
 
     private QueryBuilder assembleTermQuery(String pathName, GuluToken.Type compareOp, Object value) {
         switch (compareOp) {
             case EQ:
-                return QueryBuilders.termQuery(pathName,value);
+                return QueryBuilders.termQuery(pathName, value);
             case NE:
-                return QueryBuilders.boolQuery().mustNot(QueryBuilders.termQuery(pathName,value));
+                return QueryBuilders.boolQuery().mustNot(QueryBuilders.termQuery(pathName, value));
             case GT:
-                return QueryBuilders.rangeQuery(pathName).from(value,false);
+                return QueryBuilders.rangeQuery(pathName).from(value, false);
             case GTE:
-                return QueryBuilders.rangeQuery(pathName).from(value,true);
+                return QueryBuilders.rangeQuery(pathName).from(value, true);
             case LT:
-                return QueryBuilders.rangeQuery(pathName).to(value,false);
+                return QueryBuilders.rangeQuery(pathName).to(value, false);
             case LTE:
-                return QueryBuilders.rangeQuery(pathName).to(value,true);
+                return QueryBuilders.rangeQuery(pathName).to(value, true);
         }
-        throw new EsQueryTransformException("Unsupported compare operator:"+compareOp);
+        throw new EsQueryTransformException("Unsupported compare operator:" + compareOp);
     }
 
     private GuluToken.Type reverseOp(GuluToken.Type op) {
@@ -133,6 +141,10 @@ public class EsQueryTransformerVisitor implements GuluNodeVisitor<QueryBuilder> 
             default:
                 return op;
         }
+    }
+
+    private String wrapPath(String path) {
+        return currentNestedPrefix.isEmpty()? path : currentNestedPrefix + "." + path;
     }
 
 }

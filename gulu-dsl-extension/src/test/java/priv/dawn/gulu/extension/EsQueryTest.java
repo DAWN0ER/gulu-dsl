@@ -26,4 +26,11 @@ public class EsQueryTest {
         Assert.assertNotNull(accept);
     }
 
+    @Test
+    public void nestedTest(){
+        GuluExpression expression = GuluExpressions.parser("sub[f1 == 2 and f2_sub[ff2>=2 and ff3[1,2,3]] ]");
+        GuluReflectionContext context = new GuluReflectionContext(null);
+        QueryBuilder accept = expression.getAstRootNode().accept(new EsQueryTransformerVisitor(context));
+    }
+
 }

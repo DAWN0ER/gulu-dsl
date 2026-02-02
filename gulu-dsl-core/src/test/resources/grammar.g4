@@ -42,7 +42,7 @@ boolFunctionExpression
     : EXIST '(' identifier ')'                  // exist
     | identifier '[' literalList ']'            // list terms value
     | identifier IN '(' literalList ')'         // field terms valus
-    | identifier '[' expression ']'             // nested query path[property == 1] 如果这里嵌套 l# 规则，在语法树报错
+    | identifier '[' expression ']'             // nested query path[property == 1] 如果这里嵌套 #{} 引用，在语法树报错
     ;
 
 literalList

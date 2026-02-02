@@ -62,11 +62,11 @@ public class GuluContainsNode implements GuluEvalBoolNode {
             boolean valueMatched = collectionIdentifier.contains(nodeValue);
             boolean timeMatched = nodeMillValue != null && millsConvertSet.contains(nodeMillValue);
 
-            if (!valueMatched && !timeMatched) {
-                return false;
+            if (valueMatched || timeMatched) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 
