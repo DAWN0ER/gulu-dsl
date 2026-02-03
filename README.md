@@ -1,25 +1,25 @@
 # 🐠 咕噜表达式 (GuluExpression)
 
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](LICENSE)
-[![Build Status](https://travis-ci.org/dawnyang/gulu-expression.svg?branch=master)](https://travis-ci.org/dawnyang/gulu-expression)
-[![Coverage Status](https://coveralls.io/repos/github/dawnyang/gulu-expression/badge.svg?branch=master)](https://coveralls.io/github/dawnyang/gulu-expression?branch=master)
 
-**咕噜表达式** 是一个轻量级、高性能的表达式解析与执行引擎，专为 Java 应用设计。它支持复杂的布尔逻辑表达式、嵌套查询、环境变量引用等功能，适用于业务规则引擎、数据过滤、权限控制等多种场景。
+**咕噜表达式** 是一个轻量级、高性能的表达式解析与执行引擎。它支持复杂的布尔逻辑表达式、嵌套查询、环境变量引用等功能，可用于执行判断，原生支持异构为 ES 查询语句。
+
+作者正在努力开发中，release coming soon ~~~
 
 ---
 
 ## ✨ 特性
 
-- **简洁易用**：基于 DSL（领域特定语言）设计，语法直观，易于上手。
+- **简洁易用**：语法直观，易于上手，兼容 ES 精确查询语句。
 - **功能丰富**：
   - 支持常见的比较运算符（`==`, `!=`, `>`, `<`, `>=`, `<=`）
   - 支持逻辑运算符（AND, OR, NOT）
   - 支持集合操作（IN, []）
   - 支持嵌套对象查询（`user[age > 18]`）
   - 支持表达式引用（`#{refer_path}`）
-- **高性能**：采用 AST（抽象语法树）解析机制，运行时效率高。
 - **扩展性强**：支持自定义节点访问者模式，方便扩展新功能。
 - **零依赖**：核心模块无外部依赖，集成简单。
+- **原生支持异构 ES 查询语句**：扩展模块 EsQueryTransformerVisitor 一键转换为 ES 查询语句。
 
 ---
 
@@ -31,7 +31,7 @@
 <dependency>
     <groupId>priv.dawn.lab</groupId>
     <artifactId>gulu-dsl-core</artifactId>
-    <version>1.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -155,7 +155,7 @@ products[category IN ("electronics","books") AND price < 500]
 
 #### 数据类型支持
 
-DSL 支持多种数据类型：
+支持多种数据类型：
 
 - **数值类型**：整数、浮点数、长整型（支持 f/F、d/D、l/L 后缀）
 - **字符串类型**：使用单引号或双引号包围，支持转义
