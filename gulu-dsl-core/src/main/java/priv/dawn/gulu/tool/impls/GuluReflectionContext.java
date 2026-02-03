@@ -2,6 +2,8 @@ package priv.dawn.gulu.tool.impls;
 
 import priv.dawn.gulu.ast.GuluAstNode;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
+import priv.dawn.gulu.exception.GuluContextBuildExpression;
+import priv.dawn.gulu.tool.EnvironmentVarSupplier;
 import priv.dawn.gulu.tool.GuluContext;
 import priv.dawn.gulu.tool.GuluReferableExpression;
 import priv.dawn.gulu.utils.ReflectUtils;
@@ -17,10 +19,14 @@ import java.util.*;
  */
 public class GuluReflectionContext implements GuluContext {
 
+    // base object
     private final Object object;
-    private final Map<String, GuluReferableExpression> referMap = new HashMap<>();
-    private final Map<String, Boolean> resCache = new HashMap<>();
-    private final Set<String> runningReferExp = new HashSet<>();
+    // refer
+    private Map<String, GuluReferableExpression> referMap = new HashMap<>();
+    private Map<String, Boolean> resCache = new HashMap<>();
+    private Set<String> runningReferExp = new HashSet<>();
+    // envVar
+    private Map<String, EnvironmentVarSupplier> environmentVarSupplierMap;
 
     public GuluReflectionContext(Object object) {
         this.object = object;
@@ -33,12 +39,25 @@ public class GuluReflectionContext implements GuluContext {
 
     @Override
     public Object getEnvVar(String path) {
-        return null;
+        String[] paths = path.split("\\.");
+        Object envVar = Optional.ofNullable(environmentVarSupplierMap.get(paths[0]))
+                .map(supplier -> supplier.getVarByFullPath(paths))
+                .orElse(null);
+        if(envVar == null){
+            throw new ExpressionEvaluateException("Environment variable [" + path + "] is not exists");
+        }
+        return envVar;
     }
 
     @Override
     public GuluAstNode getReferAstNode(String path) {
-        return Optional.of(referMap.get(path)).map(GuluReferableExpression::getAstRootNode).orElse(null);
+        GuluAstNode astNode = Optional.ofNullable(referMap.get(path))
+                .map(GuluReferableExpression::getAstRootNode)
+                .orElse(null);
+        if(astNode == null){
+            throw new ExpressionEvaluateException("refer expression is not exists");
+        }
+        return astNode;
     }
 
     @Override
@@ -66,4 +85,17 @@ public class GuluReflectionContext implements GuluContext {
         }
         referMap.put(expression.getReferPath(), expression);
     }
+
+    public void registerEnvVarSupplier(EnvironmentVarSupplier supplier) {
+        Set<String> roots = supplier.supportRootPath();
+        for (String root : roots) {
+            if (environmentVarSupplierMap.containsKey(root)) {
+                throw new GuluContextBuildExpression("Duplicate supported root path:" + root);
+            }
+        }
+        for (String root : roots) {
+            environmentVarSupplierMap.put(root, supplier);
+        }
+    }
+
 }
