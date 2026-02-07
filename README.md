@@ -68,6 +68,66 @@ public class Example {
 }
 ```
 
+将表达式转义成 ES 查询语句，需要依赖 gulu-dsl-extension 这个 maven 包
+```java
+public class Example {
+  public static void main(String[] args) {
+    GuluExpression expression = GuluExpressions.parser("followers[userId == 123 and userRoles[groupId == 'rd_default' or authId[1002,1003,1004]]]");
+    GuluReflectionContext context = new GuluReflectionContext(null); // 不需要实体 Object，传入 null 
+    QueryBuilder accept = expression.getAstRootNode().accept(new EsQueryTransformerVisitor(context));
+  }
+}
+```
+转义成的 ES 查询如下：
+```json
+{
+  "nested" : {
+    "path" : "followers",
+    "query" : {
+      "bool" : {
+        "must" : [
+          {
+            "term" : {
+              "followers.userId" : {
+                "value" : 123,
+                "boost" : 1.0
+              }
+            }
+          },
+          {
+            "nested" : {
+              "path" : "followers.userRoles",
+              "query" : {
+                "bool" : {
+                  "should" : [
+                    {
+                      "term" : {
+                        "followers.userRoles.groupId" : {
+                          "value" : "rd_default"
+                        }
+                      }
+                    },
+                    {
+                      "terms" : {
+                        "followers.userRoles.authId" : [
+                          1002,
+                          1003,
+                          1004
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
 ### DSL 语法介绍
 
 Gulu DSL 是一种类似于 Elasticsearch 查询语法的领域特定语言，专门用于对对象属性进行布尔逻辑判断。以下是详细的语法说明：

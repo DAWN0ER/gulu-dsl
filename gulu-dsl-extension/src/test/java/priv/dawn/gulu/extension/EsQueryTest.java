@@ -28,9 +28,11 @@ public class EsQueryTest {
 
     @Test
     public void nestedTest(){
-        GuluExpression expression = GuluExpressions.parser("sub[f1 == 2 and f2_sub[ff2>=2 and ff3[1,2,3]] ]");
+        GuluExpression expression = GuluExpressions.parser("followers[userId == 123 and userRoles[groupId == 'rd_default' or authId[1002,1003,1004]]]");
         GuluReflectionContext context = new GuluReflectionContext(null);
         QueryBuilder accept = expression.getAstRootNode().accept(new EsQueryTransformerVisitor(context));
+//        Assert.assertNotNull(accept);
+        System.out.println(accept);
     }
 
 }
