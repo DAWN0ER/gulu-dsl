@@ -9,9 +9,6 @@ import priv.dawn.gulu.api.GuluContext;
 import priv.dawn.gulu.api.GuluReferableExpression;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/25/13:08
  */

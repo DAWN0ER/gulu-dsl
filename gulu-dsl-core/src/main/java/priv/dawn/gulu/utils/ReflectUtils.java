@@ -1,7 +1,5 @@
 package priv.dawn.gulu.utils;
 
-import priv.dawn.gulu.exception.ExpressionEvaluateException;
-
 import java.lang.reflect.Field;
 
 /**
@@ -22,7 +20,7 @@ public class ReflectUtils {
                 field.setAccessible(true);
                 obj = field.get(obj);
             } catch (Exception e) {
-                throw new ExpressionEvaluateException("Can not get field by path:" + path);
+                throw new RuntimeException("Can not get field by path:" + path);
             }
         }
         return obj;

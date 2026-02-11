@@ -9,16 +9,13 @@ import priv.dawn.gulu.api.GuluContext;
 import priv.dawn.gulu.api.GuluExpression;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/25/13:07
  */
 public class GuluCommonExpression implements GuluExpression {
 
-   private final String expressionText;
-   private final GuluAstNode root;
+    private final String expressionText;
+    private final GuluAstNode root;
 
     public GuluCommonExpression(String expressionText) {
         this.expressionText = expressionText;
@@ -32,7 +29,7 @@ public class GuluCommonExpression implements GuluExpression {
 
     @Override
     public boolean evaluate(GuluContext context) {
-        if(root instanceof GuluEvalBoolNode){
+        if (root instanceof GuluEvalBoolNode) {
             return ((GuluEvalBoolNode) root).evaluate(context);
         }
         throw new ExpressionEvaluateException("Expression can not evaluate to boolean");

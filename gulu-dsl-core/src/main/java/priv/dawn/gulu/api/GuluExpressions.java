@@ -5,9 +5,6 @@ import priv.dawn.gulu.api.impls.GuluCommonReferableExpression;
 import priv.dawn.gulu.api.impls.ctx.BaseGuluContext;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/25/13:08
  */

@@ -11,8 +11,7 @@ import priv.dawn.gulu.exception.GuluContextBuildExpression;
 import java.util.*;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
+ * 上下文模板类
  *
  * @author Dawn Yang
  * @since 2026/02/11/20:08
@@ -28,13 +27,24 @@ public abstract class BaseGuluContext implements GuluContext {
     // options
     protected GuluContextOptions options;
 
+    protected abstract Object getValueByPath(String path) throws Exception;
+
+    @Override
+    public Object getIdentifier(String path) {
+        try {
+            return getValueByPath(path);
+        } catch (Exception e) {
+            throw new ExpressionEvaluateException(String.format("Exception when getting identifier from '%s'", path), e);
+        }
+    }
+
     @Override
     public Object getEnvVar(String path) {
         String[] paths = path.split("\\.");
         Object envVar = Optional.ofNullable(environmentVarSupplierMap.get(paths[0]))
                 .map(supplier -> supplier.getVarByFullPath(paths))
                 .orElse(null);
-        if(envVar == null){
+        if (envVar == null) {
             throw new ExpressionEvaluateException("Environment variable [" + path + "] is not exists");
         }
         return envVar;
@@ -45,7 +55,7 @@ public abstract class BaseGuluContext implements GuluContext {
         GuluAstNode astNode = Optional.ofNullable(referMap.get(path))
                 .map(GuluReferableExpression::getAstRootNode)
                 .orElse(null);
-        if(astNode == null){
+        if (astNode == null) {
             throw new ExpressionEvaluateException("refer expression is not exists");
         }
         return astNode;
@@ -92,7 +102,6 @@ public abstract class BaseGuluContext implements GuluContext {
             environmentVarSupplierMap.put(root, supplier);
         }
     }
-
 
 
 }

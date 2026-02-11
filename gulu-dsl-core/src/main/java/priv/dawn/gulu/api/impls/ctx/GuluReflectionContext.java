@@ -18,10 +18,9 @@ public class GuluReflectionContext extends BaseGuluContext {
         this.object = object;
     }
 
+
     @Override
-    public Object getIdentifier(String path) {
+    protected Object getValueByPath(String path) throws Exception {
         return ReflectUtils.getFieldByPath(object, path);
     }
-
-
 }

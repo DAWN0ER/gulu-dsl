@@ -3,9 +3,6 @@ package priv.dawn.gulu.api;
 import java.util.Set;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/02/03/19:54
  */
