@@ -3,7 +3,7 @@ package priv.dawn.gulu.ast.node;
 import lombok.Getter;
 import priv.dawn.gulu.ast.GuluEvalBoolNode;
 import priv.dawn.gulu.ast.GuluNodeVisitor;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package priv.dawn.gulu.tool;
+package priv.dawn.gulu.api;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,9 +1,6 @@
-package priv.dawn.gulu.tool;
+package priv.dawn.gulu.api;
 
 import priv.dawn.gulu.ast.GuluAstNode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,9 +19,5 @@ public interface GuluContext {
 
     Boolean getReferExpressionResult(String path);
 
-    void registerReferExpression(GuluReferableExpression expression);
-
-    default List<String> getSupportedDateFormat(){
-        return new ArrayList<>();
-    }
+    GuluContextOptions getOptions();
 }

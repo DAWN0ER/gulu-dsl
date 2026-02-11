@@ -9,7 +9,7 @@ import priv.dawn.gulu.ast.GuluNodeVisitor;
 import priv.dawn.gulu.ast.node.*;
 import priv.dawn.gulu.extension.exceptions.EsQueryTransformException;
 import priv.dawn.gulu.token.GuluToken;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 import priv.dawn.gulu.utils.GuluNodeValueUtils;
 
 import java.util.Collection;

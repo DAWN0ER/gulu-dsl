@@ -4,7 +4,7 @@ import lombok.Getter;
 import priv.dawn.gulu.ast.GuluAstNode;
 import priv.dawn.gulu.ast.GuluEvalBoolNode;
 import priv.dawn.gulu.ast.GuluNodeVisitor;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 
 import java.util.ArrayList;
 import java.util.List;

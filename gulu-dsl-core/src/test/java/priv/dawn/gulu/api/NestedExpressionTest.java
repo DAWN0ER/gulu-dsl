@@ -1,8 +1,8 @@
-package priv.dawn.gulu.tool;
+package priv.dawn.gulu.api;
 
 import org.junit.Assert;
 import org.junit.Test;
-import priv.dawn.gulu.tool.impls.GuluReflectionContext;
+import priv.dawn.gulu.api.impls.ctx.GuluReflectionContext;
 import priv.dawn.gulu.utils.pojo.BaseData;
 
 import java.util.ArrayList;

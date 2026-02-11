@@ -1,11 +1,9 @@
 package priv.dawn.gulu.ast;
 
+import priv.dawn.gulu.api.GuluContext;
+import priv.dawn.gulu.api.GuluContextOptions;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
-import priv.dawn.gulu.tool.GuluContext;
-import priv.dawn.gulu.tool.GuluReferableExpression;
 import priv.dawn.gulu.utils.ReflectUtils;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,12 +44,7 @@ public class NestedSubContext implements GuluContext {
     }
 
     @Override
-    public void registerReferExpression(GuluReferableExpression expression) {
-        throw new ExpressionEvaluateException("Nested expression can not refer to other expression!");
-    }
-
-    @Override
-    public List<String> getSupportedDateFormat() {
-        return parentCtx.getSupportedDateFormat();
+    public GuluContextOptions getOptions() {
+        return parentCtx.getOptions();
     }
 }

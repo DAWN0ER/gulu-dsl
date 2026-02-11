@@ -1,7 +1,8 @@
-package priv.dawn.gulu.tool;
+package priv.dawn.gulu.api;
 
-import priv.dawn.gulu.tool.impls.GuluCommonExpression;
-import priv.dawn.gulu.tool.impls.GuluCommonReferableExpression;
+import priv.dawn.gulu.api.impls.GuluCommonExpression;
+import priv.dawn.gulu.api.impls.GuluCommonReferableExpression;
+import priv.dawn.gulu.api.impls.ctx.BaseGuluContext;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +21,7 @@ public class GuluExpressions {
         return new GuluCommonReferableExpression(expression, expReferPath);
     }
 
-    public static GuluExpression parserAndRegister(String expression, String expReferPath, GuluContext context){
+    public static GuluExpression parserAndRegister(String expression, String expReferPath, BaseGuluContext context){
         GuluReferableExpression guluExpression = parserReferable(expression, expReferPath);
         context.registerReferExpression(guluExpression);
         return guluExpression;

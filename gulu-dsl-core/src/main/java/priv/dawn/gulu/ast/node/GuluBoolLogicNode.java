@@ -6,7 +6,7 @@ import priv.dawn.gulu.ast.GuluEvalBoolNode;
 import priv.dawn.gulu.ast.GuluNodeVisitor;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
 import priv.dawn.gulu.token.GuluToken;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 
 import java.util.List;
 

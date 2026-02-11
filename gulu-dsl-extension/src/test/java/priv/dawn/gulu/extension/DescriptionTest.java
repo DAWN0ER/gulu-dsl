@@ -2,8 +2,8 @@ package priv.dawn.gulu.extension;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import priv.dawn.gulu.tool.GuluExpression;
-import priv.dawn.gulu.tool.GuluExpressions;
+import priv.dawn.gulu.api.GuluExpression;
+import priv.dawn.gulu.api.GuluExpressions;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,11 +1,12 @@
 package priv.dawn.gulu.ast.node;
 
 import lombok.Getter;
+import priv.dawn.gulu.api.GuluContextOptions;
 import priv.dawn.gulu.ast.GuluAstNode;
 import priv.dawn.gulu.ast.GuluEvalBoolNode;
 import priv.dawn.gulu.ast.GuluNodeVisitor;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 import priv.dawn.gulu.utils.GuluNodeValueUtils;
 
 import java.util.*;
@@ -45,6 +46,10 @@ public class GuluContainsNode implements GuluEvalBoolNode {
     @Override
     public boolean evaluate(GuluContext context) {
         Object identifier = context.getIdentifier(this.identifier.getPath());
+        List<String> supportFormats = Optional.ofNullable(context.getOptions())
+                .map(GuluContextOptions::getSupportDateFormats)
+                .orElse(null);
+
         if (identifier != null && !(identifier instanceof Collection)) {
             throw new ExpressionEvaluateException("Identifier is not a collection");
         }
@@ -52,12 +57,12 @@ public class GuluContainsNode implements GuluEvalBoolNode {
             return false;
         }
         Collection<?> collectionIdentifier = (Collection<?>) identifier;
-        Set<Long> millsConvertSet = collectionIdentifier.stream().map(e -> GuluNodeValueUtils.tryConvertEpochMills(e, context.getSupportedDateFormat()))
+        Set<Long> millsConvertSet = collectionIdentifier.stream().map(e -> GuluNodeValueUtils.tryConvertEpochMills(e, supportFormats))
                 .filter(Objects::nonNull).collect(Collectors.toSet());
 
         for (GuluAstNode node : containsList) {
             Object nodeValue = GuluNodeValueUtils.value(node, context);
-            Long nodeMillValue = GuluNodeValueUtils.tryConvertEpochMills(nodeValue, context.getSupportedDateFormat());
+            Long nodeMillValue = GuluNodeValueUtils.tryConvertEpochMills(nodeValue, supportFormats);
 
             boolean valueMatched = collectionIdentifier.contains(nodeValue);
             boolean timeMatched = nodeMillValue != null && millsConvertSet.contains(nodeMillValue);

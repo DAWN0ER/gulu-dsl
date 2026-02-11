@@ -3,7 +3,7 @@ package priv.dawn.gulu.utils;
 import priv.dawn.gulu.ast.GuluAstNode;
 import priv.dawn.gulu.ast.node.*;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

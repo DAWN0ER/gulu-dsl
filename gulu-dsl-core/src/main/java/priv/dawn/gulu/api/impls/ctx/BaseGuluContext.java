@@ -1,12 +1,12 @@
-package priv.dawn.gulu.tool.impls;
+package priv.dawn.gulu.api.impls.ctx;
 
+import priv.dawn.gulu.api.EnvironmentVarSupplier;
+import priv.dawn.gulu.api.GuluContext;
+import priv.dawn.gulu.api.GuluContextOptions;
+import priv.dawn.gulu.api.GuluReferableExpression;
 import priv.dawn.gulu.ast.GuluAstNode;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
 import priv.dawn.gulu.exception.GuluContextBuildExpression;
-import priv.dawn.gulu.tool.EnvironmentVarSupplier;
-import priv.dawn.gulu.tool.GuluContext;
-import priv.dawn.gulu.tool.GuluReferableExpression;
-import priv.dawn.gulu.utils.ReflectUtils;
 
 import java.util.*;
 
@@ -15,27 +15,18 @@ import java.util.*;
  * Description:
  *
  * @author Dawn Yang
- * @since 2026/01/27/23:13
+ * @since 2026/02/11/20:08
  */
-public class GuluReflectionContext implements GuluContext {
+public abstract class BaseGuluContext implements GuluContext {
 
-    // base object
-    private final Object object;
     // refer
-    private Map<String, GuluReferableExpression> referMap = new HashMap<>();
-    private Map<String, Boolean> resCache = new HashMap<>();
-    private Set<String> runningReferExp = new HashSet<>();
+    protected Map<String, GuluReferableExpression> referMap = new HashMap<>();
+    protected Map<String, Boolean> resCache = new HashMap<>();
+    protected Set<String> runningReferExp = new HashSet<>();
     // envVar
-    private Map<String, EnvironmentVarSupplier> environmentVarSupplierMap;
-
-    public GuluReflectionContext(Object object) {
-        this.object = object;
-    }
-
-    @Override
-    public Object getIdentifier(String path) {
-        return ReflectUtils.getFieldByPath(object, path);
-    }
+    protected Map<String, EnvironmentVarSupplier> environmentVarSupplierMap;
+    // options
+    protected GuluContextOptions options;
 
     @Override
     public Object getEnvVar(String path) {
@@ -79,6 +70,10 @@ public class GuluReflectionContext implements GuluContext {
     }
 
     @Override
+    public GuluContextOptions getOptions() {
+        return options;
+    }
+
     public void registerReferExpression(GuluReferableExpression expression) {
         if (referMap.containsKey(expression.getReferPath())) {
             throw new IllegalArgumentException("refer path already exists");
@@ -97,5 +92,7 @@ public class GuluReflectionContext implements GuluContext {
             environmentVarSupplierMap.put(root, supplier);
         }
     }
+
+
 
 }

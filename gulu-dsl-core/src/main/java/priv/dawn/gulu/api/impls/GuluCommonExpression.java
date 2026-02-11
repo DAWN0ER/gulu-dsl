@@ -1,12 +1,12 @@
-package priv.dawn.gulu.tool.impls;
+package priv.dawn.gulu.api.impls;
 
 import priv.dawn.gulu.ast.GuluAstNode;
 import priv.dawn.gulu.ast.GuluEvalBoolNode;
 import priv.dawn.gulu.ast.GuluParser;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
 import priv.dawn.gulu.token.GuluLexer;
-import priv.dawn.gulu.tool.GuluContext;
-import priv.dawn.gulu.tool.GuluExpression;
+import priv.dawn.gulu.api.GuluContext;
+import priv.dawn.gulu.api.GuluExpression;
 
 /**
  * Created with IntelliJ IDEA.

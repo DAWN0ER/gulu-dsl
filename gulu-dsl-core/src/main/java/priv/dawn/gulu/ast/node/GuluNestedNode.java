@@ -6,7 +6,7 @@ import priv.dawn.gulu.ast.GuluEvalBoolNode;
 import priv.dawn.gulu.ast.GuluNodeVisitor;
 import priv.dawn.gulu.ast.NestedSubContext;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 
 import java.util.ArrayList;
 import java.util.Collection;

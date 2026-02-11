@@ -1,6 +1,6 @@
 package priv.dawn.gulu.ast;
 
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 
 /**
  * Created with IntelliJ IDEA.

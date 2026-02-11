@@ -2,7 +2,7 @@ package priv.dawn.gulu.utils;
 
 import priv.dawn.gulu.ast.GuluAstNode;
 import priv.dawn.gulu.exception.ExpressionEvaluateException;
-import priv.dawn.gulu.tool.GuluContext;
+import priv.dawn.gulu.api.GuluContext;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ public class GuluAstNodeComparator implements Comparator<GuluAstNode> {
 
     public GuluAstNodeComparator(GuluContext ctx) {
         this.ctx = ctx;
-        if (ctx.getSupportedDateFormat() != null && !ctx.getSupportedDateFormat().isEmpty()) {
-            supportFormats = ctx.getSupportedDateFormat().stream().map(SimpleDateFormat::new).collect(Collectors.toList());
+        if (ctx.getOptions() != null && ctx.getOptions().getSupportDateFormats() != null && !ctx.getOptions().getSupportDateFormats().isEmpty()) {
+            supportFormats = ctx.getOptions().getSupportDateFormats().stream().map(SimpleDateFormat::new).collect(Collectors.toList());
         } else {
             supportFormats = new ArrayList<>();
             supportFormats.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
@@ -43,8 +43,8 @@ public class GuluAstNodeComparator implements Comparator<GuluAstNode> {
         if (val1 instanceof Number && val2 instanceof Number) {
             return Double.compare(((Number) val1).doubleValue(), ((Number) val2).doubleValue());
         }
-        Long epochMills1 = GuluNodeValueUtils.tryConvertEpochMills(val1,supportFormats);
-        Long epochMills2 = GuluNodeValueUtils.tryConvertEpochMills(val2,supportFormats);
+        Long epochMills1 = GuluNodeValueUtils.tryConvertEpochMills(val1, supportFormats);
+        Long epochMills2 = GuluNodeValueUtils.tryConvertEpochMills(val2, supportFormats);
         if (epochMills1 != null && epochMills2 != null) {
             return epochMills1.compareTo(epochMills2);
         }

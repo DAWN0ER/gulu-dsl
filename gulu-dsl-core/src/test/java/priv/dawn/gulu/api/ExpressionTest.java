@@ -1,10 +1,10 @@
-package priv.dawn.gulu.tool;
+package priv.dawn.gulu.api;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
-import priv.dawn.gulu.tool.impls.GuluReflectionContext;
+import priv.dawn.gulu.api.impls.ctx.GuluReflectionContext;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

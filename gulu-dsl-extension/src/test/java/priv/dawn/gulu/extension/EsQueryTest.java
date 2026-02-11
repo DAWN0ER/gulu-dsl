@@ -3,9 +3,9 @@ package priv.dawn.gulu.extension;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.junit.Assert;
 import org.junit.Test;
-import priv.dawn.gulu.tool.GuluExpression;
-import priv.dawn.gulu.tool.GuluExpressions;
-import priv.dawn.gulu.tool.impls.GuluReflectionContext;
+import priv.dawn.gulu.api.GuluExpression;
+import priv.dawn.gulu.api.GuluExpressions;
+import priv.dawn.gulu.api.impls.ctx.GuluReflectionContext;
 
 /**
  * Created with IntelliJ IDEA.
