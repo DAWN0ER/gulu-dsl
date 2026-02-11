@@ -13,9 +13,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/24/20:52
  */

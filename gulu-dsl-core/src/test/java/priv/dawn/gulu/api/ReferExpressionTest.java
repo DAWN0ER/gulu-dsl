@@ -7,9 +7,6 @@ import priv.dawn.gulu.api.impls.ctx.GuluReflectionContext;
 import priv.dawn.gulu.utils.pojo.BaseData;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/28/21:26
  */

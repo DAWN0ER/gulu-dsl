@@ -6,9 +6,6 @@ import org.junit.Test;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/02/11/22:45
  */

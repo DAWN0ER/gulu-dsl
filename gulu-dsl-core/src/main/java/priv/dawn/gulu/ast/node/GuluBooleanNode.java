@@ -6,9 +6,6 @@ import priv.dawn.gulu.ast.GuluNodeVisitor;
 import priv.dawn.gulu.api.GuluContext;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/24/17:03
  */

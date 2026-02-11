@@ -8,9 +8,6 @@ import priv.dawn.gulu.api.GuluExpressions;
 import priv.dawn.gulu.api.impls.ctx.GuluReflectionContext;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/02/01/23:32
  */

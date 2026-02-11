@@ -1,9 +1,6 @@
 package priv.dawn.gulu.exception;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/24/19:51
  */

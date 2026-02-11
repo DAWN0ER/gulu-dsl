@@ -3,9 +3,6 @@ package priv.dawn.gulu.ast;
 import priv.dawn.gulu.api.GuluContext;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/24/16:34
  */

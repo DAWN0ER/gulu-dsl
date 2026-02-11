@@ -3,9 +3,6 @@ package priv.dawn.gulu.utils;
 import java.lang.reflect.Field;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/27/23:01
  */

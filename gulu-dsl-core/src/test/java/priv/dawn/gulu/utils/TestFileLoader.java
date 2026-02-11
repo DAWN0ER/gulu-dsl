@@ -8,9 +8,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/25/12:07
  */

@@ -7,9 +7,6 @@ import priv.dawn.gulu.exception.ExpressionEvaluateException;
 import priv.dawn.gulu.api.GuluContext;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/24/22:10
  */

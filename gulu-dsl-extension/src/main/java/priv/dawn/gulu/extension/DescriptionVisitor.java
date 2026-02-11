@@ -7,9 +7,6 @@ import priv.dawn.gulu.ast.node.*;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/25/14:03
  */

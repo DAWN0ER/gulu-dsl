@@ -6,9 +6,6 @@ import priv.dawn.gulu.exception.ExpressionEvaluateException;
 import priv.dawn.gulu.utils.ReflectUtils;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/24/21:03
  */

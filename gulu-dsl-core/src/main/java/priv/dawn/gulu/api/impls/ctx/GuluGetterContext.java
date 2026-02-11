@@ -1,9 +1,6 @@
 package priv.dawn.gulu.api.impls.ctx;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/02/11/20:22
  */

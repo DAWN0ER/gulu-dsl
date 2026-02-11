@@ -16,9 +16,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/02/01/22:29
  */

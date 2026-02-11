@@ -6,9 +6,6 @@ import priv.dawn.gulu.api.GuluExpression;
 import priv.dawn.gulu.api.GuluExpressions;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/25/14:17
  */

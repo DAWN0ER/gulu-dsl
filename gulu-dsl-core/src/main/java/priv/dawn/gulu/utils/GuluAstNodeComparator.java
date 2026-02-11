@@ -11,9 +11,6 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/27/0:41
  */

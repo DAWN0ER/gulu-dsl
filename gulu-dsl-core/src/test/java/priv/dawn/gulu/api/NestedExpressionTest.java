@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/02/01/20:15
  */

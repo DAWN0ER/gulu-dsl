@@ -10,9 +10,6 @@ import java.util.List;
 import static priv.dawn.gulu.token.GuluToken.Type.*;
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- *
  * @author Dawn Yang
  * @since 2026/01/23/22:59
  */
