@@ -342,6 +342,4 @@ mvn test
 
 ## 🌟 Star History
 
-## Star History
-
 [![Star History Chart](https://api.star-history.com/svg?repos=DAWN0ER/gulu-dsl&type=date&legend=top-left)](https://www.star-history.com/#DAWN0ER/gulu-dsl&type=date&legend=top-left)
